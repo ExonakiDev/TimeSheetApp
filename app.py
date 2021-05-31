@@ -1,5 +1,6 @@
 from flask import Flask, flash, redirect, render_template, request, session
 from flaskext.mysql import MySQL
+from database import Database
 import pymysql
 
 # init flask app
@@ -15,25 +16,8 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 mysql = MySQL()
 mysql.init_app(app)
 
-
 # make cursor to db
 # cursor = mysql.get_db().cursor()
-
-class Database:
-    def _init_(self):
-        host = "127.0.0.1"
-        user = "root"
-        password = "Minusb@12"
-        db = "demo"
-        self.con = pymysql.connect(host=host, user=user, password=password, db=db,
-                                   cursorclass=pymysql.cursors.DictCursor)
-        self.cur = self.con.cursor()
-
-    def list_products(self):
-        self.cur.execute("SELECT PID, Name, Price FROM products WHERE PID='1'")
-        result = self.cur.fetchall()
-        return result
-
 
 @app.route("/")
 def index():
@@ -45,17 +29,20 @@ def index():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    error = None
     session.clear()
     # If user reached route via post method
     if request.method == "POST":
         if not request.form.get("username"):
             # Return error message TODO
-            return error
+            error = "Please enter username!"
+            return render_template('login.html', error=error)
         elif not request.form.get("password"):
             # Return error message TODO
-            return error
-
+            error = "Please enter password!"
+            return render_template('login.html', error=error)
         # TODO Check login
+
 
         # redirect to main page
         return redirect("/")

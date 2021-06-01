@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block body %}
+  <form action="/login" method="post">
+    <img src="https://lh3.googleusercontent.com/-rlmscJlD9hg/X2M9OfnMFhI/AAAAAAAACWo/hZRTQjji1V8qCVlX1igfuSsC49L94H6aACLcBGAsYHQ/image.png">
+    <h2 class="title">Welcome</h2>
+          <div class="input-div one">  
+             <div class="i">
+                <i class="fas fa-user"></i>
+             </div>
+
+             <div class="div">
+                <input type="text" class="input" placeholder="Employee ID" name="id">
+             </div>
+          </div>
+          <div class="input-div pass">
+             <div class="i">
+                <i class="fas fa-lock"></i>
+             </div>
+             <div class="div">
+                <input type="password" id="myInput" class="input" placeholder="Password" name="password">
+             </div>
+          </div>
+          <!-- An element to toggle between password visibility -->
+       <dd id="rr-element">
+          <label for="rr-1">
+          <input type="checkbox" id="rr-1" name="rr[]" onclick="myFunction()" >  Show Password
+         </label>
+    </dd>
+    <!-- Login button -->
+          <input type="submit" class="btn" value="Login">
+
+    <p align="center"><h3>New User?</h3></p>
+        <a href="#">
+      <p align="center">Register here</p>
+  </form>
+{% endblock %}

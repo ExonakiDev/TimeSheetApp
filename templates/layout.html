@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<title>Login Form</title>
+  	<link rel="stylesheet" type="text/css" href="/static/style.css">
+  	<script src="/static/styles.js"></script>
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <div class="boxed">
+  		<div class="login-content">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+        {% block body %}{% endblock %}
+      </div>
+    </div>
+
+  </body>
+</html>

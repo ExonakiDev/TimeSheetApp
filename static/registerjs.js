@@ -13,6 +13,16 @@ function remcl(){
 	}
 }
 
+function check_pass() {
+    if (document.getElementById('myInput').value ==
+            document.getElementById('myInput2').value) {
+        document.getElementById('submit').disabled = false;
+    } else {
+        document.getElementById('submit').disabled = true;
+    myInput2.setCustomValidity("Password mismatch");
+		document.getElementById("submit").click()
+	}
+}
 
 inputs.forEach(input => {
 	input.addEventListener("focus", addcl);

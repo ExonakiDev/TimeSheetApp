@@ -1,9 +1,16 @@
 {% extends "layout.html" %}
+{% block title %}
+Login
+{% endblock %}
+{% block head %}
+  <link rel="stylesheet" type="text/css" href="/static/style.css">
+  <script type="text/javascript" src="{{ url_for('static', filename='styles.js') }}"></script>
+{% endblock %}
 {% block body %}
   <form action="/login" method="post">
     <img src="https://lh3.googleusercontent.com/-rlmscJlD9hg/X2M9OfnMFhI/AAAAAAAACWo/hZRTQjji1V8qCVlX1igfuSsC49L94H6aACLcBGAsYHQ/image.png">
     <h2 class="title">Welcome</h2>
-          <div class="input-div one">  
+          <div class="input-div one">
              <div class="i">
                 <i class="fas fa-user"></i>
              </div>
@@ -30,7 +37,7 @@
           <input type="submit" class="btn" value="Login">
 
     <p align="center"><h3>New User?</h3></p>
-        <a href="#">
+        <a href="{{ url_for('register') }}">
       <p align="center">Register here</p>
   </form>
 {% endblock %}

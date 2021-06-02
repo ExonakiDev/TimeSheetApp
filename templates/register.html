@@ -45,7 +45,7 @@ Register
                  <i class="fas fa-lock"></i>
             </div>
             <div class="div">
-                 <input type="password" id="myInput" class="input"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number, one uppercase and lowercase letter, and at least 8 or more characters" required placeholder="Password" name="password">
+                 <input type="password" onchange="check_pass()" id="myInput" class="input"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number, one uppercase and lowercase letter, and at least 8 or more characters" required placeholder="Password" name="password">
          </div>
       </div>
 
@@ -55,14 +55,16 @@ Register
        <i class="fas fa-lock"></i>
   </div>
   <div class="div">
-       <input type="password" id="myInput2" class="input"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number, one uppercase and lowercase letter, and at least 8 or more characters" required placeholder="Confirm Password" name="confirm">
+       <input type="password" onchange="check_pass()" id="myInput2" class="input"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number, one uppercase and lowercase letter, and at least 8 or more characters" required placeholder="Confirm Password" name="confirm">
   </div>
   </div>
+  <br>
   <!-- An element to toggle between password visibility -->
   <dd id="rr-element">
-  <label for="rr-1">
-    <input type="checkbox" id="rr-1" name="rr[]" onclick="myFunction()" >  Show Password
-  </label>
+     <label for="rr-1">
+      <input type="checkbox" id="switch" class="checkbox" onclick="myFunction()" />
+      <label for="switch" class="toggle"><br><br> Show Password
+      </label></label>
   </dd>
   <!-- Birthday -->
   <div class="input-div pass">
@@ -78,7 +80,7 @@ Register
        <br/>
 
   <!-- Login button -->
-      <input type="submit" class="btn" value="Register">
+      <input type="submit" class="btn" value="Register" id="submit" disabled>
 
   </form>
 {% endblock %}

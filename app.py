@@ -127,7 +127,7 @@ def register():
             return error
         elif password != confirm:
             # Return error message # TODO
-            error = "Confirm password field missing"
+            error = "Passwords do not match"
             return error
 
         try:

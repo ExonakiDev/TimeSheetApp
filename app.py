@@ -67,15 +67,15 @@ def login():
         try:
             rows = db.check_credentials(username)
             print(rows, file=sys.stderr)
-            if len(rows)!=1 or not (rows[0]["password"] == password):
+            if len(rows)!=1 or not (rows[0]["user_password"] == password):
                 error = "Invalid credentials"
                 flash("Invalid credentials")
                 return redirect(url_for("login"))
             # Remember which user has logged in
             session["user_id"] = rows[0]["employee_id"]
         finally:
-            # db.close_cursor()
-            pass
+            db.close_cursor()
+
         # redirect to main page
         flash('You were successfully logged in')
         return redirect("/")
@@ -91,15 +91,61 @@ def logout():
     # redirect to main page
     return redirect("/")
 
-@app.route("/register")
+@app.route("/register", methods=['GET', 'POST'])
 def register():
+    error = None
+
+    db=Database()
+
     if request.method == "POST":
-        if not request.form.get("username"):
+        email = request.form.get("email")
+        password = request.form.get("password")
+        confirm = request.form.get("confirm")
+        if not request.form.get("first"):
             # Return error message TODO
+            error = "First Name field missing"
             return error
-        elif not request.form.get("password"):
+        elif not request.form.get("last"):
             # Return error message TODO
+            error = "Last Name field missing"
             return error
+        elif not email:
+            # Return error message TODO
+            error = "Email field missing"
+            return error
+        elif not password:
+            # Return error message TODO
+            error = "Password field missing"
+            return error
+        elif not confirm:
+            # Return error message TODO
+            error = "Confirm password field missing"
+            return error
+        elif not request.form.get("dob"):
+            # Return error message TODO
+            error = "D.O.B. field missing"
+            return error
+        elif password != confirm:
+            # Return error message # TODO
+            error = "Confirm password field missing"
+            return error
+
+        try:
+            # Check if user is in our database
+            rows = db.check_exist(email)
+            if len(rows)!=0:
+                error = "User already exists"
+                flash(error)
+                return redirect(url_for("register"))
+            else:
+                # insert user details in database
+                db.insert_user(email, password)
+
+        finally:
+            db.close_cursor()
+
+        flash("You have successfully registered")
+        return redirect("/login")
     else:
         return render_template("register.html")
 

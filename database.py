@@ -21,5 +21,22 @@ class Database:
         rows = self.cur.fetchall()
         return rows
 
-    # def close_cursor(self):
-    #     self.con.close()
+    def check_credentials_from_email(self, email):
+        sql = "SELECT * from Login WHERE email_id = %s"
+        self.cur.execute(sql, email)
+        rows = self.cur.fetchall()
+        return rows
+
+    def check_exist(self, email):
+        sql = "SELECT * from Login WHERE email_id = %s"
+        self.cur.execute(sql, email.lower())
+        rows = self.cur.fetchall()
+        return rows
+
+    def insert_user(self, email, password):
+        sql = "INSERT INTO Login (email_id, user_password) VALUES (%s, %s)"
+        self.cur.execute(sql, (email.lower(), password))
+        self.con.commit()
+
+    def close_cursor(self):
+        self.con.close()

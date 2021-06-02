@@ -2,15 +2,22 @@
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
+	height: auto;
 }
 
-body{
-    font-family: 'Poppins', sans-serif;
-    overflow: hidden;
+body, html{
+  font-family: 'Poppins', sans-serif;
+	display: block;
+	margin: 0;
+	height: 100%;
+}
+
+.bg {
 	background-image: url("https://vistapointe.net/images/turquoise-green-4.jpg");
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
+	height: 100%;
 }
 
 .wave{
@@ -21,8 +28,51 @@ body{
 	z-index: -1;
 }
 
+.toggle {
+	position : relative ;
+	display : inline-block;
+	width : 60px;
+	height : 30px;
+	background-color: gray;
+	border-radius: 30px;
+	border: 2px solid gray;
+}
+
+/* After slide changes */
+.toggle:after {
+	content: '';
+	position: absolute;
+	width: 26px;
+	height: 24px;
+	border-radius: 50%;
+	background-color: white;
+	top: 1px;
+	left: 1px;
+	transition:  all 0.5s;
+}
+ /* Toggle text */
+ p {
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+}
+
+/* Checkbox cheked effect */
+.checkbox:checked + .toggle::after {
+	left : 33px;
+}
+
+/* Checkbox cheked toggle label bg color */
+.checkbox:checked + .toggle {
+	background-color: mediumseagreen;
+}
+
+/* Checkbox vanished */
+.checkbox {
+	display : none;
+}
+
 form{
-	width: 900px;
+	width: 500px;
   margin-left: auto;
   margin-right: auto;
 	background-color: #fff;
@@ -64,7 +114,7 @@ form{
 .login-content h2{
 	margin: 15px 0;
 	color: #333;
-	text-transform: uppercase;
+	/* text-transform: uppercase; */
 	font-size: 2.9rem;
 }
 
@@ -81,8 +131,14 @@ form{
 	margin-top: 0;
 }
 
-
-
+.messages li {
+    color: #fff;
+    display: block;
+    font-size: 1.2em;
+    font-weight: bold;
+    letter-spacing: 0.025em;
+    text-align: center;
+}
 
 .i{
 	color: #d9d9d9;
@@ -193,10 +249,16 @@ a:hover{
 	cursor: pointer;
 	transition: .5s;
 }
+
 .btn:hover{
 	background-position: right;
 }
 
+@media all and (orientation: landscape) {
+	.bg {
+		height: 100%;
+	}
+}
 
 @media screen and (max-width: 1050px){
 	.container{
@@ -206,7 +268,7 @@ a:hover{
 
 @media screen and (max-width: 1000px){
 	form{
-		width: 290px;
+		width: 490px;
 	}
 
 	.login-content h2{
@@ -234,5 +296,27 @@ a:hover{
 
 	.login-content{
 		justify-content: center;
+	}
+}
+
+@media screen and (max-width: 490px){
+	.container{
+		grid-template-columns: 1fr;
+	}
+
+	.img{
+		display: none;
+	}
+
+	.wave{
+		display: none;
+	}
+
+	.login-content{
+		justify-content: center;
+	}
+
+	.bg {
+		height: auto;
 	}
 }

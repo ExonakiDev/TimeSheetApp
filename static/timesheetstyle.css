@@ -1,0 +1,22 @@
+html, body {
+  height: 100%;
+  background-image: url("https://dhosting.com/assets/gfx/img/backgrounds/header-bg-2.svg");
+	background-position: center;
+	background-repeat: no-repeat;
+  height: 100%;
+	background-size: cover;
+  color: #000;
+}
+
+.time {
+  width: 80px;
+  color: #000;
+}
+
+footer {
+  margin-top: 20px;
+}
+footer a {
+  text-decoration: none;
+  color: #c0c0c0;
+}

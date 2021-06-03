@@ -7,6 +7,8 @@ Register
   <script type="text/javascript" src="{{ url_for('static', filename='registerjs.js') }}"></script>
 {% endblock %}
 {% block body %}
+<div class="boxed">
+  <div class="login-content">
   <form action="/register" method="post">
       <h2 class="title">Register</h2>
   <!--First Name  -->
@@ -81,6 +83,10 @@ Register
 
   <!-- Login button -->
       <input type="submit" class="btn" value="Register" id="submit" disabled>
-
+      <h3>Already a User?<h3>
+      <a href="{{ url_for('login') }}">
+      <p align="center">Login here</p></a>
   </form>
+</div>
+</div>
 {% endblock %}

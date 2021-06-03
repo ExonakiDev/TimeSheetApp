@@ -14,7 +14,7 @@ $(document).ready(function(){
       });
 
       function populateDates() {
-        
+
         $('#tBody').empty(); //clear table
         $('.bottom').removeClass('d-none'); //display total hours worked
         let chosenDate = $('#datePicker').datepicker('getDate'); //get chosen date from datepicker
@@ -52,7 +52,7 @@ $(document).ready(function(){
             let breakTime = $(`#break${monStartWeekDays[i]}`).val();
             let hoursWorked = (finishTime.getTime() - startTime.getTime()) / 1000;
             hoursWorked /= (60 * 60);
-            
+
 
             if (startVal && finishVal && breakTime=="1") { //providing both start and finish times are set
               if (hoursWorked >= 0) { //if normal day shift
@@ -60,6 +60,11 @@ $(document).ready(function(){
               } else { //if night shift
                 $(`#hoursWorked${monStartWeekDays[i]}`).html(24 + hoursWorked);
               }
+            }
+            else if (breakTime!="1")
+            {
+              hoursWorked = 0;
+              $(`#hoursWorked${monStartWeekDays[i]}`).html(hoursWorked);
             }
 
             updateTotal();
@@ -79,9 +84,9 @@ $(document).ready(function(){
           });
           document.querySelector('#totalHours').innerHTML = totalHoursWorked;
         }
-        
+
 
       }
-      
+
 
     });

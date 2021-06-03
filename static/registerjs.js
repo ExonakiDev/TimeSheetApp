@@ -19,8 +19,6 @@ function check_pass() {
         document.getElementById('submit').disabled = false;
     } else {
         document.getElementById('submit').disabled = true;
-    myInput2.setCustomValidity("Password mismatch");
-		document.getElementById("submit").click()
 	}
 }
 

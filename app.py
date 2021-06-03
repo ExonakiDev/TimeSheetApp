@@ -1,6 +1,8 @@
 import sys
 from flask import Flask, flash, redirect, render_template, request, url_for, session
 from flaskext.mysql import MySQL
+from flask_login import LoginManager
+# from flaskext.login import LoginManager
 from flask_bcrypt import Bcrypt
 from flask_session import Session
 from database import Database
@@ -33,7 +35,10 @@ def index():
     ## Placeholder
     if not session.get("user_id"):
         return redirect("/login")
-    return "Logged in"
+    db=Database()
+    current_user = session["user_id"]
+
+    return render_template("timesheet.html")
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -48,6 +53,7 @@ def login():
     # If user reached route via post method
     if request.method == "POST":
         username = request.form.get("id")
+        email = request.form.get("email")
         password = request.form.get("password")
         # print(username, password)
         if not username:
@@ -55,6 +61,12 @@ def login():
             error = "Please enter Employee ID!"
             # return render_template('login.html', error=error)
             flash("Please enter Employee ID!")
+            return redirect(url_for("login"))
+        elif not username:
+            # Return error message TODO
+            error = "Please enter Email ID!"
+            # return render_template('login.html', error=error)
+            flash("Please enter Email ID!")
             return redirect(url_for("login"))
         elif not password:
             # Return error message TODO
@@ -67,7 +79,7 @@ def login():
         try:
             rows = db.check_credentials(username)
             print(rows, file=sys.stderr)
-            if len(rows)!=1 or not (rows[0]["user_password"] == password):
+            if len(rows)!=1 or not (rows[0]["user_password"] == password) or not(rows[0]["email_id"]== email):
                 error = "Invalid credentials"
                 flash("Invalid credentials")
                 return redirect(url_for("login"))

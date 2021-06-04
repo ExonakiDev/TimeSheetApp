@@ -22,24 +22,22 @@ Make Entry
   <main>
     <form>
       <div class="form-group row">
-        <div class="col-2"></div>
-      <label class="sr-only" for="name">Name</label>
-      <input type="text" class="form-control mb-2 mr-sm-2 col-4" id="name" placeholder="Name">
+        <div class="col-4"></div>
 
       <label class="sr-only" for="datePicker">Date</label>
       <input type="text" class="form-control mb-2 mr-sm-2 col-4" id="datePicker" placeholder="Week commencing">
       <div class="col-2"></div>
       </div>
     </form>
+    <form method="post" action="/">
     <table class="table table-dark table-striped table-hover">
       <thead>
         <tr>
           <th>Day</th>
           <th>Date</th>
-          <th>Start Time</th>
-          <th>Finish Time</th>
+          <th>      </th>
           <th>Status</th>
-          <th>Hours Worked</th>
+          <th>      </th>
         </tr>
       </thead>
       <tbody id="tBody">
@@ -47,12 +45,10 @@ Make Entry
     </table>
     <div class="row bottom d-none">
       <div class="col">
-        <button type="button" id="submit" class="btn btn-success">Submit</button>
-      </div>
-      <div class="col">
-        <h2 id="hoursWorkedText" class="text-right">Total Hours Worked: <span id="totalHours">0</span></h2>
+        <button type="submit" id="submit" name="submit_button" class="btn btn-success">Submit</button>
       </div>
     </div>
+    </form>
   </main>
   </div>
 <!-- partial -->

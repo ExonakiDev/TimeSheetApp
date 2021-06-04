@@ -3,6 +3,13 @@ html, body {
   color: white;
 }
 
+.form-group input {
+  align-content: center;
+  position: relative;
+  align-items: center;
+  text-align: center;
+}
+
 .bg {
   background-image: url("https://www.jesusislife.in/wp-content/uploads/2019/05/Savin-NY-Website-Background-Web.jpg");
   background-position: center;

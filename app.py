@@ -52,17 +52,10 @@ def login():
 
     # If user reached route via post method
     if request.method == "POST":
-        username = request.form.get("id")
         email = request.form.get("email")
         password = request.form.get("password")
         # print(username, password)
-        if not username:
-            # Return error message TODO
-            error = "Please enter Employee ID!"
-            # return render_template('login.html', error=error)
-            flash("Please enter Employee ID!")
-            return redirect(url_for("login"))
-        elif not username:
+        if not email:
             # Return error message TODO
             error = "Please enter Email ID!"
             # return render_template('login.html', error=error)
@@ -77,9 +70,9 @@ def login():
 
         # Check login
         try:
-            rows = db.check_credentials(username)
+            rows = db.check_credentials_from_email(request.form.get("email"))
             print(rows, file=sys.stderr)
-            if len(rows)!=1 or not (rows[0]["user_password"] == password) or not(rows[0]["email_id"]== email):
+            if len(rows)!=1 or not (rows[0]["user_password"] == password) or not (rows[0]["email_id"]==email):
                 error = "Invalid credentials"
                 flash("Invalid credentials")
                 return redirect(url_for("login"))

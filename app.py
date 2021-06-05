@@ -6,6 +6,7 @@ from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
 from flask_session import Session
 from database import Database
+from helpers import generate_weekID
 import pymysql
 
 # init flask app
@@ -30,15 +31,44 @@ mysql.init_app(app)
 # make cursor to db
 # cursor = mysql.get_db().cursor()
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def index():
-    ## Placeholder
+    #Call DB class to init database
+    db=Database()
+
     if not session.get("user_id"):
         return redirect("/login")
-    db=Database()
+
     current_user = session["user_id"]
 
-    return render_template("timesheet.html")
+    if request.method == "POST":
+        weekDates={}
+        dayStatus={}
+        days=["statusSaturday", "statusSunday", "statusMonday", "statusTuesday", "statusWednesday", "statusThursday", "statusFriday"]
+        for i in range(0,7):
+            weekDates[i]=request.form.get(f'td{i+1}')
+            dayStatus[i]=request.form.get(days[i])
+            if not weekDates[i]:
+                flash("Please select date from datepicker!")
+                return redirect(url_for("index"))
+            if not dayStatus[i]:
+                flash("Please select day status for all dates!")
+                return redirect(url_for("index"))
+        # DEBUG
+        print(weekDates, file=sys.stderr)
+        print(dayStatus, file=sys.stderr)
+
+        weekID = generate_weekID(weekDates)
+        try:
+            if db.timesheet_staging(current_user, dayStatus, weekID):
+                db.timesheet_target(current_user, dayStatus, weekID)
+        finally:
+            db.close_cursor()
+
+        flash(f'Timesheet successfully submitted for the week starting on {weekDates[0]}!')
+        return redirect(url_for("index"))
+    else:
+        return render_template("timesheet.html", user = current_user)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -46,7 +76,7 @@ def login():
     """ User logs in here """
     error = None
     # Forget past user ids
-    # session.clear()
+    session.clear()
     #Call DB class to init database
     db=Database()
 
@@ -68,16 +98,19 @@ def login():
             flash("Please enter password!")
             return redirect(url_for("login"))
 
-        # Check login
+        # Check login credentials from database
         try:
             rows = db.check_credentials_from_email(request.form.get("email"))
+
+            #DEBUG
             print(rows, file=sys.stderr)
+
             if len(rows)!=1 or not (rows[0]["user_password"] == password) or not (rows[0]["email_id"]==email):
                 error = "Invalid credentials"
                 flash("Invalid credentials")
                 return redirect(url_for("login"))
             # Remember which user has logged in
-            session["user_id"] = rows[0]["employee_id"]
+            session["user_id"] = rows[0]["EmployeeID"]
         finally:
             db.close_cursor()
 
@@ -145,12 +178,14 @@ def register():
             else:
                 # insert user details in database
                 db.insert_user(email, password)
+                emp_id = db.return_emp_id(email)
+                db.insert_employee_details(emp_id, request.form.get("first"), request.form.get("last"), request.form.get("dob"))
 
         finally:
             db.close_cursor()
 
-        flash("You have successfully registered")
-        return redirect("/login")
+        flash("You have successfully registered!")
+        return redirect(url_for("register"))
     else:
         return render_template("register.html")
 

@@ -2,10 +2,10 @@ import sys
 from flask import Flask, flash, redirect, render_template, request, url_for, session
 from flaskext.mysql import MySQL
 from flask_login import LoginManager
-# from flaskext.login import LoginManager
 from flask_bcrypt import Bcrypt
 from flask_session import Session
 from database import Database
+from makedb import MakeDB
 from helpers import generate_weekID
 import pymysql
 
@@ -23,13 +23,12 @@ Session(app)
 # Password Hashing
 bcrypt = Bcrypt(app)
 
-
 # init MySQL database
 mysql = MySQL()
 mysql.init_app(app)
 
-# make cursor to db
-# cursor = mysql.get_db().cursor()
+#Make database if not EXISTS
+MakeDB()
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -105,7 +104,7 @@ def login():
             #DEBUG
             print(rows, file=sys.stderr)
 
-            if len(rows)!=1 or not (rows[0]["user_password"] == password) or not (rows[0]["email_id"]==email):
+            if len(rows)!=1 or not (bcrypt.check_password_hash(rows[0]["user_password"],password) or not (rows[0]["email_id"]==email)):
                 error = "Invalid credentials"
                 flash("Invalid credentials")
                 return redirect(url_for("login"))
@@ -177,7 +176,8 @@ def register():
                 return redirect(url_for("register"))
             else:
                 # insert user details in database
-                db.insert_user(email, password)
+                pw_hash = bcrypt.generate_password_hash(password)
+                db.insert_user(email, pw_hash)
                 emp_id = db.return_emp_id(email)
                 db.insert_employee_details(emp_id, request.form.get("first"), request.form.get("last"), request.form.get("dob"))
 

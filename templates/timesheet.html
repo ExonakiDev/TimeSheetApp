@@ -10,14 +10,18 @@ Make Entry
 <link rel='stylesheet' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css'><link rel="stylesheet" href="/static/timesheetstyle.css">
 {% endblock %}
 {% block body %}
-<div class="topnav-right">
-  <a href="{{ url_for('logout') }}">Log out</a>
+<div class="topnav">
+  <div class="topnav-centered">
+    <a class="active"><h4 align="center">TIMESHEET ENTRY</h4></a>
+  </div>
+  <div class="topnav-right">
+    <a href="{{ url_for('logout') }}">Log out</a>
+  </div>
 </div>
 <br><br>
 <div class="container text-center">
   <header>
 <!--       <h1>NTB</h1> -->
-    <h3>Timesheet entry</h3>
   </header>
   <main>
     <form>

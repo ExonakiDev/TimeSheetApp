@@ -3,9 +3,9 @@ from helpers import parse_sql
 
 class MakeDB:
     def __init__(self):
-        host = server
-        user = SQLusername
-        password = SQLpassword
+        host = ENV['server']
+        user = ENV['SQLusername']
+        password = ENV['SQLpassword']
 
         stmts = parse_sql('final.sql')
         self.con = pymysql.connect(host=host, user=user, password=password,

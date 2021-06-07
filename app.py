@@ -13,7 +13,7 @@ import pymysql
 app = Flask(__name__)
 app.config['TESTING'] = False
 # session secret key
-app.secret_key = SECRETKEYFLASK
+app.secret_key = ENV['SECRETKEYFLASK']
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 app.config["SESSION_PERMANENT"] = False

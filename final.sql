@@ -1,6 +1,6 @@
-CREATE database IF NOT EXISTS timesheet;
+CREATE database IF NOT EXISTS sql6417659;
 
-use timesheet;
+use sql6417659;
 
 CREATE TABLE IF NOT EXISTS login(
 EmployeeID BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,

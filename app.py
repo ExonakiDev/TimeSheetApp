@@ -13,7 +13,7 @@ import pymysql
 app = Flask(__name__)
 app.config['TESTING'] = False
 # session secret key
-app.secret_key = b'L\xdb\x1b\xc2\xa9\xbc\xc0\x84\xcb\xb67\x0c\xdf#hW'
+app.secret_key = SECRETKEYFLASK
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 app.config["SESSION_PERMANENT"] = False
@@ -195,4 +195,4 @@ def register():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()

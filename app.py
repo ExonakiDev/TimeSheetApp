@@ -82,6 +82,7 @@ def login():
     # If user reached route via post method
     if request.method == "POST":
         email = request.form.get("email")
+        email = email.strip()
         password = request.form.get("password")
         # print(username, password)
         if not email:
@@ -99,7 +100,7 @@ def login():
 
         # Check login credentials from database
         try:
-            rows = db.check_credentials_from_email(request.form.get("email"))
+            rows = db.check_credentials_from_email(email)
 
             #DEBUG
             print(rows, file=sys.stderr)
@@ -137,6 +138,7 @@ def register():
 
     if request.method == "POST":
         email = request.form.get("email")
+        email=email.strip()
         password = request.form.get("password")
         confirm = request.form.get("confirm")
         if not request.form.get("first"):
@@ -181,7 +183,7 @@ def register():
                 pw_hash = bcrypt.generate_password_hash(password)
                 db.insert_user(email, pw_hash)
                 emp_id = db.return_emp_id(email)
-                db.insert_employee_details(emp_id, request.form.get("first"), request.form.get("last"), request.form.get("dob"))
+                db.insert_employee_details(emp_id, request.form.get("first").strip(), request.form.get("last").strip(), request.form.get("dob"))
 
         finally:
             db.close_cursor()

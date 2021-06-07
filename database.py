@@ -1,15 +1,16 @@
 import pymysql
 from datetime import datetime
+from boto.s3.connection import S3Connection
 
 timesheetID = 1
 default_EndDate = '9999-12-31'
 
 class Database:
     def __init__(self):
-        host = ENV['server']
-        user = ENV['SQLusername']
-        password = ENV['SQLpassword']
-        db = ENV['SQLname']
+        host = S3Connection(os.environ['server'])
+        user = S3Connection(os.environ['SQLusername'])
+        password = S3Connection(os.environ['SQLpassword'])
+        db =S3Connection(os.environ['SQLname'])
 
         self.con = pymysql.connect(host=host, user=user, password=password, db=db,
                                    cursorclass=pymysql.cursors.DictCursor)

@@ -1,11 +1,12 @@
 import pymysql
 from helpers import parse_sql
+from boto.s3.connection import S3Connection
 
 class MakeDB:
     def __init__(self):
-        host = ENV['server']
-        user = ENV['SQLusername']
-        password = ENV['SQLpassword']
+        host = S3Connection(os.environ['server'])
+        user = S3Connection(os.environ['SQLusername'])
+        password = S3Connection(os.environ['SQLpassword'])
 
         stmts = parse_sql('final.sql')
         self.con = pymysql.connect(host=host, user=user, password=password,

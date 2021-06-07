@@ -95,7 +95,7 @@ def login():
             error = "Please enter password!"
             # return render_template('login.html', error=error)
             flash("Please enter password!")
-            return redirect(url_for("login"))
+            return redirect(url_for("/"))
 
         # Check login credentials from database
         try:
@@ -165,7 +165,8 @@ def register():
         elif password != confirm:
             # Return error message # TODO
             error = "Passwords do not match"
-            return error
+            flash(error)
+            return redirect(url_for("register"))
 
         try:
             # Check if user is in our database

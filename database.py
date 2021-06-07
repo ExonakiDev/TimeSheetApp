@@ -8,10 +8,10 @@ default_EndDate = '9999-12-31'
 
 class Database:
     def __init__(self):
-        host = S3Connection(os.environ['server'])
-        user = S3Connection(os.environ['SQLusername'])
-        password = S3Connection(os.environ['SQLpassword'])
-        db =S3Connection(os.environ['SQLname'])
+        host = os.getenv(server)
+        user = os.getenv(SQLusername)
+        password = os.getenv(SQLpassword)
+        db = os.getenv(SQLname)
 
         self.con = pymysql.connect(host=host, user=user, password=password, db=db,
                                    cursorclass=pymysql.cursors.DictCursor)

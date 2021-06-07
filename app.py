@@ -15,7 +15,7 @@ from boto.s3.connection import S3Connection
 app = Flask(__name__)
 app.config['TESTING'] = False
 # session secret key
-app.secret_key = S3Connection(os.environ['SECRETKEYFLASK'])
+app.secret_key = os.getenv(SECRETKEYFLASK)
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 app.config["SESSION_PERMANENT"] = False

@@ -107,7 +107,8 @@ def login():
             if len(rows)!=1 or not (bcrypt.check_password_hash(rows[0]["user_password"],password) or not (rows[0]["email_id"]==email)):
                 error = "Invalid credentials"
                 flash("Invalid credentials")
-                return redirect(url_for("login"))
+                # return redirect(url_for("login"))
+                return render_template("login.html", error=error)
             # Remember which user has logged in
             session["user_id"] = rows[0]["EmployeeID"]
         finally:

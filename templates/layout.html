@@ -20,19 +20,19 @@
        <meta name="viewport" content="width=device-width, initial-scale=1">
    </head>
    <div class="bg">
+
         {% block body %}{% endblock %}
-        <br>
-    <div class="messages">
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul class=flashes>
-        {% for message in messages %}
-          <li>{{ message }}</li>
-        {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %}
-    </div>
+        <div class="messages">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+        </div>
  </div>
   </body>
 </html>

@@ -8,10 +8,10 @@ default_EndDate = '9999-12-31'
 
 class Database:
     def __init__(self):
-        host = os.getenv(server)
-        user = os.getenv(SQLusername)
-        password = os.getenv(SQLpassword)
-        db = os.getenv(SQLname)
+        host = os.environ.get('server')
+        user = os.environ.get('SQLusername')
+        password = os.environ.get('SQLpassword')
+        db = os.environ.get('SQLname')
 
         self.con = pymysql.connect(host=host, user=user, password=password, db=db,
                                    cursorclass=pymysql.cursors.DictCursor)

@@ -17,8 +17,10 @@ function check_pass() {
     if (document.getElementById('myInput').value ==
             document.getElementById('myInput2').value) {
         document.getElementById('submit').disabled = false;
+				document.getElementById('password-error').innerHTML = 'Passwords match';
     } else {
         document.getElementById('submit').disabled = true;
+				document.getElementById('password-error').innerHTML = 'Passwords do not match!'
 	}
 }
 

@@ -1,4 +1,5 @@
 import pymysql
+import os
 from helpers import parse_sql
 from boto.s3.connection import S3Connection
 

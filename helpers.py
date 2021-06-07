@@ -1,4 +1,5 @@
 import sys
+import os
 
 def generate_weekID(weekDates):
     date, month, year = weekDates[0].split('/')

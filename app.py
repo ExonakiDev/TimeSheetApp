@@ -1,4 +1,5 @@
 import sys
+import os
 from flask import Flask, flash, redirect, render_template, request, url_for, session
 from flaskext.mysql import MySQL
 from flask_login import LoginManager

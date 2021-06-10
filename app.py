@@ -61,8 +61,7 @@ def index():
 
         weekID = generate_weekID(weekDates)
         try:
-            if db.timesheet_staging(current_user, dayStatus, weekID):
-                db.timesheet_target(current_user, dayStatus, weekID)
+            db.timesheet_target(current_user, dayStatus, weekID)
         finally:
             db.close_cursor()
 

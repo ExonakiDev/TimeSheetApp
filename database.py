@@ -59,11 +59,11 @@ class Database:
         self.cur.execute(sql, (emp_id, fname.lower(), lname.lower(), dob))
         self.con.commit()
 
-    def timesheet_staging(self, emp_id, dayStatus, weekID):
-        sql = "INSERT INTO timesheet_STG (EmployeeID, Day_1, Day_2, Day_3, Day_4, Day_5, Day_6, Day_7, WeekID) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-        self.cur.execute(sql, (emp_id, dayStatus[0], dayStatus[1], dayStatus[2], dayStatus[3], dayStatus[4], dayStatus[5], dayStatus[6], weekID))
-        self.con.commit()
-        return True
+    # def timesheet_staging(self, emp_id, dayStatus, weekID):
+    #     sql = "INSERT INTO timesheet_STG (EmployeeID, Day_1, Day_2, Day_3, Day_4, Day_5, Day_6, Day_7, WeekID) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    #     self.cur.execute(sql, (emp_id, dayStatus[0], dayStatus[1], dayStatus[2], dayStatus[3], dayStatus[4], dayStatus[5], dayStatus[6], weekID))
+    #     self.con.commit()
+    #     return True
 
     def timesheet_target(self, emp_id, dayStatus, weekID):
         sql = "SELECT * from timesheet_TGT WHERE EmployeeID = %s AND weekID = %s"

@@ -37,16 +37,16 @@ CREATE TABLE IF NOT EXISTS timesheet_TGT(
                   ,FOREIGN KEY (EmployeeID) references login(EmployeeID)
 );
 
-CREATE TABLE IF NOT EXISTS timesheet_STG
-(
-                  EmployeeID BIGINT
-                  ,Day_1 INT
-                  ,Day_2 INT
-                  ,Day_3 INT
-                  ,Day_4 INT
-                  ,Day_5 INT
-                  ,Day_6 INT
-                  ,Day_7 INT
-                  ,WeekID BIGINT
-                  ,FOREIGN KEY (EmployeeID) references login(EmployeeID)
-);
+-- CREATE TABLE IF NOT EXISTS timesheet_STG
+-- (
+--                   EmployeeID BIGINT
+--                   ,Day_1 INT
+--                   ,Day_2 INT
+--                   ,Day_3 INT
+--                   ,Day_4 INT
+--                   ,Day_5 INT
+--                   ,Day_6 INT
+--                   ,Day_7 INT
+--                   ,WeekID BIGINT
+--                   ,FOREIGN KEY (EmployeeID) references login(EmployeeID)
+-- );
